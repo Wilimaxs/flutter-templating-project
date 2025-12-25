@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AppColor {
-  AppColor._();
+class AppColors {
+  AppColors._();
 
   // Light Mode Colors
   static const Color primaryLight = Color(0xFF4C72B0);

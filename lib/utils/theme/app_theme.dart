@@ -17,24 +17,24 @@ class AppTheme {
       fontFamily: FontFamily.plusJakartaSans,
       colorScheme: ColorScheme(
         brightness: brightness,
-        primary: isDark ? AppColor.primaryDark : AppColor.primaryLight,
-        onPrimary: isDark ? AppColor.black : AppColor.white,
+        primary: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+        onPrimary: isDark ? AppColors.black : AppColors.white,
         primaryContainer: isDark
-            ? AppColor.primaryContainerDark
-            : AppColor.primaryContainerLight,
-        onPrimaryContainer: isDark ? AppColor.white : AppColor.primaryLight,
-        secondary: isDark ? AppColor.secondaryDark : AppColor.secondaryLight,
-        onSecondary: isDark ? AppColor.black : AppColor.white,
-        error: AppColor.error,
-        onError: AppColor.white,
-        surface: isDark ? AppColor.surfaceDark : AppColor.surfaceLight,
-        onSurface: isDark ? AppColor.text10 : AppColor.text90,
-        outline: isDark ? AppColor.outlineDark : AppColor.outlineLight,
-        onSurfaceVariant: isDark ? AppColor.text50 : AppColor.text70,
+            ? AppColors.primaryContainerDark
+            : AppColors.primaryContainerLight,
+        onPrimaryContainer: isDark ? AppColors.white : AppColors.primaryLight,
+        secondary: isDark ? AppColors.secondaryDark : AppColors.secondaryLight,
+        onSecondary: isDark ? AppColors.black : AppColors.white,
+        error: AppColors.error,
+        onError: AppColors.white,
+        surface: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
+        onSurface: isDark ? AppColors.text10 : AppColors.text90,
+        outline: isDark ? AppColors.outlineDark : AppColors.outlineLight,
+        onSurfaceVariant: isDark ? AppColors.text50 : AppColors.text70,
       ),
       scaffoldBackgroundColor: isDark
-          ? AppColor.backgroundDark
-          : AppColor.backgroundLight,
+          ? AppColors.backgroundDark
+          : AppColors.backgroundLight,
     );
   }
 }
