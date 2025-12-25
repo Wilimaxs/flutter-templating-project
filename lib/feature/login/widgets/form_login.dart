@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ppob_koperasi_payment/utils/theme/app_color.dart';
 import 'package:ppob_koperasi_payment/utils/widgets/custom_text_field.dart';
+import 'package:ppob_koperasi_payment/utils/widgets/primary_button.dart';
 
 class FormLogin extends StatelessWidget {
   const FormLogin({super.key});
@@ -29,6 +30,8 @@ class FormLogin extends StatelessWidget {
             highlightColor: AppColors.transparent,
           ),
         ),
+        const SizedBox(height: 24.0),
+        PrimaryButton(text: 'Login', onPressed: () {}),
       ],
     );
   }

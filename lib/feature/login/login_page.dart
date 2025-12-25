@@ -27,7 +27,8 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 24.0),
               // The form login widget would be placed here
-              const FormLogin()
+              const FormLogin(),
+              const SizedBox(height: 24.0),
             ],
           ),
         ),
