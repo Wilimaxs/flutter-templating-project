@@ -5,10 +5,12 @@ import 'package:ppob_koperasi_payment/utils/localization/app_translation.dart';
 import 'package:ppob_koperasi_payment/utils/theme/app_theme.dart';
 
 import 'data/local_storage/storage_manager.dart';
+import 'feature/auth/authentication.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageManager.init();
+  Get.put(AuthenticationService());
   runApp(const MyApp());
 }
 

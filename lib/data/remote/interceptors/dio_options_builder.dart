@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:ppob_koperasi_payment/data/local_storage/storage_manager.dart';
+import 'package:ppob_koperasi_payment/feature/auth/authentication.dart';
 
 class DioOptionsBuilder {
   static Future<Options> build({
@@ -16,6 +18,10 @@ class DioOptionsBuilder {
       'xTokenPin',
       isSecure: true,
     );
+
+    if (token == null) {
+      Get.find<AuthenticationService>().setUnauthenticated();
+    }
 
     if (token != null && token.isNotEmpty) {
       newHeaders["Authorization"] = "Bearer $token";
