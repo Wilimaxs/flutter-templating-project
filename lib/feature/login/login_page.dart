@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ppob_koperasi_payment/feature/login/widgets/another_login.dart';
 import 'package:ppob_koperasi_payment/feature/login/widgets/form_login.dart';
 
 class LoginPage extends StatelessWidget {
@@ -29,6 +30,7 @@ class LoginPage extends StatelessWidget {
               // The form login widget would be placed here
               const FormLogin(),
               const SizedBox(height: 24.0),
+              const AnotherLogin(),
             ],
           ),
         ),

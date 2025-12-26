@@ -8,9 +8,10 @@ class PrimaryButton extends StatelessWidget {
   final bool enabled;
   final double width;
   final double height;
+  final bool reverse;
   final Widget? icon;
-  final Color? backgroundColor;
   final Color? textColor;
+  final double? radius;
 
   const PrimaryButton({
     super.key,
@@ -19,10 +20,11 @@ class PrimaryButton extends StatelessWidget {
     this.isLoading = false,
     this.enabled = true,
     this.width = double.infinity,
-    this.height = 42.0,
+    this.height = 46.0,
+    this.reverse = false,
     this.icon,
-    this.backgroundColor,
     this.textColor,
+    this.radius,
   });
 
   @override
@@ -33,18 +35,29 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: (enabled && !isLoading) ? onPressed : null,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? AppColors.primaryLight,
-          foregroundColor: textColor ?? AppColors.white,
+          backgroundColor: reverse
+              ? AppColors.white
+              : AppColors.primaryLight,
+          foregroundColor: reverse
+          ? (textColor ?? AppColors.black)
+              : (textColor ?? AppColors.white),
           disabledBackgroundColor: AppColors.text30,
           disabledForegroundColor: AppColors.text50,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(radius ?? 12.0),
+          ),
+          side: BorderSide(
+            color: reverse ? AppColors.outlineDark : AppColors.primaryContainerLight,
+            width: 1.5,
           ),
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           textStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
             fontWeight: FontWeight.w600,
           ),
+          splashFactory: NoSplash.splashFactory,
+          shadowColor: Colors.transparent,
+          surfaceTintColor: Colors.transparent,
         ),
         child: isLoading
             ? const SizedBox(
