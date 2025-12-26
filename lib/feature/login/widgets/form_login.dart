@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ppob_koperasi_payment/routes/app_pages.dart';
 import 'package:ppob_koperasi_payment/utils/theme/app_color.dart';
 import 'package:ppob_koperasi_payment/utils/widgets/custom_text_field.dart';
 import 'package:ppob_koperasi_payment/utils/widgets/primary_button.dart';
@@ -31,7 +33,9 @@ class FormLogin extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24.0),
-        PrimaryButton(text: 'Login', onPressed: () {}),
+        PrimaryButton(text: 'Login', onPressed: () {
+          Get.offAllNamed(Routes.bottomNavigation);
+        }),
       ],
     );
   }
