@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ppob_koperasi_payment/data/local_storage/storage_manager.dart';
+import 'package:ppob_koperasi_payment/model/user.dart';
 import 'package:ppob_koperasi_payment/routes/app_pages.dart';
 
 enum AuthStatus { unknown, authenticated, unauthenticated, onboarded }
@@ -10,6 +11,12 @@ class AuthenticationService extends GetxService {
   @override
   void onInit() {
     super.onInit();
+    status.value = AuthStatus.unknown;
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
     ever(status, _handleRouting);
     checkInitialStatus();
   }
@@ -36,7 +43,7 @@ class AuthenticationService extends GetxService {
   void _handleRouting(AuthStatus status) {
     switch (status) {
       case AuthStatus.authenticated:
-        // Get.offAllNamed(Routes.home);
+        Get.offAllNamed(Routes.login);
         break;
       case AuthStatus.unauthenticated:
         Get.offAllNamed(Routes.login);
@@ -52,22 +59,35 @@ class AuthenticationService extends GetxService {
     }
   }
 
-  void setOnboarded() async {
-    await StorageManager.save('isFirstTime', false);
-    status.value = AuthStatus.unauthenticated;
+  Future<void> saveAuthData({required String token, required User user}) async {
+    await StorageManager.save('token', token, isSecure: true);
+    await StorageManager.save('user', user, isSecure: false);
+    // await StorageManager.save('isFirstTime', false);
+    setAuthenticated();
   }
 
-  void setUnauthenticated() async {
+  Future<void> logout() async {
     // final bool isFirstTime =
     //     await StorageManager.read<bool>('isFirstTime') ?? false;
     await StorageManager.deleteAll();
     // await StorageManager.save('isFirstTime', isFirstTime);
+    setUnauthenticated();
+  }
+
+  Future<void> onBoarding() async {
+    await StorageManager.save('isFirstTime', false);
+    setUnauthenticated();
+  }
+
+  void setAuthenticated() {
+    status.value = AuthStatus.authenticated;
+  }
+
+  void setUnauthenticated() async {
     status.value = AuthStatus.unauthenticated;
   }
 
-  void setAuthenticated(String token) async {
-    await StorageManager.save('token', token, isSecure: true);
-    // await StorageManager.save('isFirstTime', false);
-    status.value = AuthStatus.authenticated;
+  void setOnboarding() async {
+    status.value = AuthStatus.unauthenticated;
   }
 }

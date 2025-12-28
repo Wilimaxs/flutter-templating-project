@@ -1,3 +1,5 @@
+import 'package:ppob_koperasi_payment/model/login_response.dart';
+
 import 'api_response.dart';
 import 'dio_initializer.dart';
 
@@ -7,15 +9,17 @@ class ApiService {
   ApiService(this._dio);
 
   // Example of a specific API call method (login)
-  Future<ApiResponse<String>> login({
-    required String username,
+  Future<ApiResponse<LoginResponse>> login({
+    required String email,
     required String password,
   }) async {
     return await _dio.post(
       url: '/auth/login',
-      data: {'username': username, 'password': password},
-      parser: (json) =>
-          ApiResponse<String>.fromJson(json, (data) => data.toString()),
+      data: {'email': email, 'password': password},
+      parser: (json) => ApiResponse<LoginResponse>.fromJson(
+        json,
+        (data) => LoginResponse.fromJson(data),
+      ),
     );
   }
 

@@ -2,19 +2,19 @@ import 'base_response.dart';
 
 // Response API for single object
 class ApiResponse<T> extends BaseResponse {
-  final T? result;
+  final T? data;
 
-  ApiResponse({required super.status, required super.message, this.result});
+  ApiResponse({required super.status, required super.message, this.data});
 
   factory ApiResponse.fromJson(
     Map<String, dynamic> json,
     T Function(Map<String, dynamic>)? fromJsonT,
   ) {
-    final resultData = json['result'];
+    final resultData = json['data'];
     return ApiResponse(
-      status: json['status']?.toString() ?? '',
+      status: json['status'],
       message: json['message']?.toString() ?? '',
-      result: (resultData is Map<String, dynamic> && fromJsonT != null)
+      data: (resultData is Map<String, dynamic> && fromJsonT != null)
           ? fromJsonT(resultData)
           : null,
     );
@@ -23,19 +23,19 @@ class ApiResponse<T> extends BaseResponse {
 
 // Response API for list of objects
 class ApiResponseList<T> extends BaseResponse {
-  final List<T>? result;
+  final List<T>? data;
 
-  ApiResponseList({required super.status, required super.message, this.result});
+  ApiResponseList({required super.status, required super.message, this.data});
 
   factory ApiResponseList.fromJson(
     Map<String, dynamic> json,
     T Function(Map<String, dynamic>)? fromJsonT,
   ) {
-    final resultData = json['result'];
+    final resultData = json['data'];
     return ApiResponseList(
-      status: json['status']?.toString() ?? '',
+      status: json['status'],
       message: json['message']?.toString() ?? '',
-      result: (resultData is List && fromJsonT != null)
+      data: (resultData is List && fromJsonT != null)
           ? resultData
                 .whereType<Map<String, dynamic>>()
                 .map((item) => fromJsonT(item))

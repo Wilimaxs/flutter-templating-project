@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
     return const Scaffold(
       appBar: PrimaryAppBar(
           title: 'Home Page'
-      )
+      ),
     );
   }
 }

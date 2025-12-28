@@ -13,7 +13,7 @@ class DioInitializer {
   Dio _initDio() {
     final dioInstance = Dio(
       BaseOptions(
-        baseUrl: 'https://your-api-base-url.com',
+        baseUrl: 'http://10.0.2.2:8000/api',
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
         headers: {'Content-Type': 'application/json'},

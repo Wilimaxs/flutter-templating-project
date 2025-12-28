@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ppob_koperasi_payment/data/remote/api_service.dart';
+import 'package:ppob_koperasi_payment/data/remote/dio_initializer.dart';
 import 'package:ppob_koperasi_payment/routes/app_pages.dart';
 import 'package:ppob_koperasi_payment/utils/localization/app_translation.dart';
 import 'package:ppob_koperasi_payment/utils/theme/app_theme.dart';
@@ -10,6 +12,8 @@ import 'feature/auth/authentication.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageManager.init();
+  Get.put(DioInitializer());
+  Get.put(ApiService(Get.find<DioInitializer>()));
   Get.put(AuthenticationService());
   runApp(const MyApp());
 }
