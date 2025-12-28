@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
+import 'package:ppob_koperasi_payment/feature/auth/authentication.dart';
 
 class ErrorHandler {
   static Function(String message)? onShowMessage;
@@ -44,7 +46,10 @@ class ErrorHandler {
   }
 
   static void handleAction(int? statusCode) {
-    if (statusCode == 401) onUnauthorized?.call();
+    if (statusCode == 401) {
+      Get.find<AuthenticationService>().logout();
+      onUnauthorized?.call();
+    }
     if (statusCode == 403) onForbidden?.call();
   }
 }

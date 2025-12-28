@@ -20,7 +20,7 @@ class DioOptionsBuilder {
     );
 
     if (token == null) {
-      Get.find<AuthenticationService>().setUnauthenticated();
+      Get.find<AuthenticationService>().logout();
     }
 
     if (token != null && token.isNotEmpty) {
