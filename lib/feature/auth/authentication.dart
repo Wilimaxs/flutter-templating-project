@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:ppob_koperasi_payment/data/local_storage/storage_manager.dart';
-import 'package:ppob_koperasi_payment/model/user.dart';
-import 'package:ppob_koperasi_payment/routes/app_pages.dart';
+import 'package:template_flutter/data/local_storage/storage_manager.dart';
+import 'package:template_flutter/model/user.dart';
+import 'package:template_flutter/routes/app_pages.dart';
 
 enum AuthStatus { unknown, authenticated, unauthenticated, onboarded }
 

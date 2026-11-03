@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ppob_koperasi_payment/gen/assets.gen.dart';
-import 'package:ppob_koperasi_payment/utils/theme/app_color.dart';
-import 'package:ppob_koperasi_payment/utils/widgets/primary_button.dart';
+import 'package:template_flutter/gen/assets.gen.dart';
+import 'package:template_flutter/utils/theme/app_color.dart';
+import 'package:template_flutter/utils/widgets/primary_button.dart';
 
 class AnotherLogin extends StatelessWidget {
   const AnotherLogin({super.key});

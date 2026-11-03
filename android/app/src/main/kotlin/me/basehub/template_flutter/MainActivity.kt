@@ -1,4 +1,4 @@
-package com.example.ppob_koperasi_payment
+package me.basehub.template_flutter
 
 import io.flutter.embedding.android.FlutterActivity
 

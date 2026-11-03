@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:ppob_koperasi_payment/feature/bottom_navigation/bottom_navigation_binding.dart';
-import 'package:ppob_koperasi_payment/feature/bottom_navigation/bottom_navigation_page.dart';
-import 'package:ppob_koperasi_payment/feature/home/home_page.dart';
-import 'package:ppob_koperasi_payment/feature/loader/loader_page.dart';
-import 'package:ppob_koperasi_payment/feature/login/login_binding.dart';
-import 'package:ppob_koperasi_payment/feature/login/login_page.dart';
+import 'package:template_flutter/feature/bottom_navigation/bottom_navigation_binding.dart';
+import 'package:template_flutter/feature/bottom_navigation/bottom_navigation_page.dart';
+import 'package:template_flutter/feature/home/home_page.dart';
+import 'package:template_flutter/feature/loader/loader_page.dart';
+import 'package:template_flutter/feature/login/login_binding.dart';
+import 'package:template_flutter/feature/login/login_page.dart';
 
 part 'app_routes.dart';
 

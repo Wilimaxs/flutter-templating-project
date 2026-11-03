@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ppob_koperasi_payment/data/remote/api_service.dart';
-import 'package:ppob_koperasi_payment/data/remote/dio_initializer.dart';
-import 'package:ppob_koperasi_payment/routes/app_pages.dart';
-import 'package:ppob_koperasi_payment/utils/localization/app_translation.dart';
-import 'package:ppob_koperasi_payment/utils/theme/app_theme.dart';
+import 'package:template_flutter/data/remote/api_service.dart';
+import 'package:template_flutter/data/remote/dio_initializer.dart';
+import 'package:template_flutter/routes/app_pages.dart';
+import 'package:template_flutter/utils/localization/app_translation.dart';
+import 'package:template_flutter/utils/theme/app_theme.dart';
 
 import 'data/local_storage/storage_manager.dart';
 import 'feature/auth/authentication.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'PPOB Koperasi Payment',
+      title: 'Template Flutter',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,

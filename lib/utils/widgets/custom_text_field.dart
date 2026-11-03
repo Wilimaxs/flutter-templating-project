@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:ppob_koperasi_payment/utils/theme/app_color.dart';
+import 'package:template_flutter/utils/theme/app_color.dart';
 
 class CustomTextField extends StatelessWidget {
   final String name;

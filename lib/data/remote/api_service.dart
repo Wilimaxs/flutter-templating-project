@@ -1,4 +1,4 @@
-import 'package:ppob_koperasi_payment/model/login_response.dart';
+import 'package:template_flutter/model/login_response.dart';
 
 import 'api_response.dart';
 import 'dio_initializer.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ppob_koperasi_payment/utils/theme/app_color.dart';
+import 'package:template_flutter/utils/theme/app_color.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text;

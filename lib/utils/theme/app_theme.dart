@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ppob_koperasi_payment/gen/fonts.gen.dart';
+import 'package:template_flutter/gen/fonts.gen.dart';
 import 'app_color.dart';
 
 class AppTheme {

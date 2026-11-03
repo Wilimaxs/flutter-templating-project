@@ -1,11 +1,14 @@
-name: ppob_koperasi_payment
-description: "A new Flutter project."
+name: template_flutter
+description: "A Flutter Templating Project and started Project"
 publish_to: 'none'
 
-version: 1.0.0+1
+# The structure version is [version]-[phase].[phase_version]+[build]
+# there are 2 phase = ui and data with phase_version increase after revision
+# for build this number always increase
+version: 1.0.0-ui.1+1
 
 environment:
-  sdk: '>=3.9.2 <4.0.0'
+  sdk: '>=3.11.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -17,7 +20,6 @@ dependencies:
   shared_preferences: ^2.3.3
   flutter_secure_storage: ^9.2.2
   flutter_svg: ^2.2.3
-  lottie: ^3.3.2
   flutter_form_builder: ^10.2.0
 
 dev_dependencies:
@@ -32,14 +34,12 @@ flutter_gen:
   integrations:
     image: true
     flutter_svg: true
-    lottie: true
 
 
 flutter:
   uses-material-design: true
   assets:
     - assets/icons/
-    - assets/images/
 
   fonts:
     - family: PlusJakartaSans

@@ -1,5 +1,5 @@
-import 'package:ppob_koperasi_payment/data/local_storage/secure_storage.dart';
-import 'package:ppob_koperasi_payment/data/local_storage/storage.dart';
+import 'package:template_flutter/data/local_storage/secure_storage.dart';
+import 'package:template_flutter/data/local_storage/storage.dart';
 
 class StorageManager {
   static Future<void> init() async {

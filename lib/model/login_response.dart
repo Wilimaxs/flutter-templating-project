@@ -1,4 +1,4 @@
-import 'package:ppob_koperasi_payment/model/user.dart';
+import 'package:template_flutter/model/user.dart';
 
 class LoginResponse {
   final User? user;

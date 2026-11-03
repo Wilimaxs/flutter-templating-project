@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ppob_koperasi_payment/data/dialogMixin/dialog_mixin.dart';
-import 'package:ppob_koperasi_payment/data/local_storage/storage_manager.dart';
-import 'package:ppob_koperasi_payment/data/remote/api_service.dart';
-import 'package:ppob_koperasi_payment/data/remote/error/error_handler.dart';
+import 'package:template_flutter/data/dialogMixin/dialog_mixin.dart';
+import 'package:template_flutter/data/local_storage/storage_manager.dart';
+import 'package:template_flutter/data/remote/api_service.dart';
+import 'package:template_flutter/data/remote/error/error_handler.dart';
 
 abstract class BaseController<T> extends GetxController with DialogMixin {
   final ApiService apiService = Get.find<ApiService>();

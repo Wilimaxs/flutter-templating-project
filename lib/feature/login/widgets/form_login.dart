@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
-import 'package:ppob_koperasi_payment/feature/login/login_controller.dart';
-import 'package:ppob_koperasi_payment/utils/theme/app_color.dart';
-import 'package:ppob_koperasi_payment/utils/widgets/custom_text_field.dart';
-import 'package:ppob_koperasi_payment/utils/widgets/primary_button.dart';
+import 'package:template_flutter/feature/login/login_controller.dart';
+import 'package:template_flutter/utils/theme/app_color.dart';
+import 'package:template_flutter/utils/widgets/custom_text_field.dart';
+import 'package:template_flutter/utils/widgets/primary_button.dart';
 
 class FormLogin extends GetView<LoginController> {
   const FormLogin({super.key});

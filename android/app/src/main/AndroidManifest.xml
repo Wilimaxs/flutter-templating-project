@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="ppob_koperasi_payment"
+        android:label="template_flutter"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

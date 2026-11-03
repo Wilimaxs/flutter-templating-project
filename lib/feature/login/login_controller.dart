@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
-import 'package:ppob_koperasi_payment/data/base/base_controller.dart';
-import 'package:ppob_koperasi_payment/data/remote/extention_api_service.dart';
-import 'package:ppob_koperasi_payment/feature/auth/authentication.dart';
+import 'package:template_flutter/data/base/base_controller.dart';
+import 'package:template_flutter/data/remote/extention_api_service.dart';
+import 'package:template_flutter/feature/auth/authentication.dart';
 
 class LoginController extends BaseController {
   final loginFromKey = GlobalKey<FormBuilderState>();
