@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import 'environment.dart';
 import 'interceptors/dio_interceptors.dart';
+import 'interceptors/dio_options_builder.dart';
 
 /// Creates and exposes the shared Dio instance and HTTP request methods.
 class DioInitializer {
@@ -15,11 +16,8 @@ class DioInitializer {
       BaseOptions(
         baseUrl: baseUrl,
         connectTimeout: const Duration(seconds: 30),
+        sendTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
-        headers: const {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
       ),
     );
 
@@ -32,19 +30,32 @@ class DioInitializer {
     required String url,
     required T Function(Map<String, dynamic>) parser,
     Map<String, dynamic>? queryParameters,
-  }) => _request('GET', url, parser: parser, queryParameters: queryParameters);
+    Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
+  }) => _request(
+    'GET',
+    url,
+    parser: parser,
+    queryParameters: queryParameters,
+    headers: headers,
+    cancelToken: cancelToken,
+  );
 
   Future<T> post<T>({
     required String url,
     required T Function(Map<String, dynamic>) parser,
     Object? data,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
   }) => _request(
     'POST',
     url,
     parser: parser,
     data: data,
     queryParameters: queryParameters,
+    headers: headers,
+    cancelToken: cancelToken,
   );
 
   Future<T> put<T>({
@@ -52,12 +63,16 @@ class DioInitializer {
     required T Function(Map<String, dynamic>) parser,
     Object? data,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
   }) => _request(
     'PUT',
     url,
     parser: parser,
     data: data,
     queryParameters: queryParameters,
+    headers: headers,
+    cancelToken: cancelToken,
   );
 
   Future<T> patch<T>({
@@ -65,12 +80,16 @@ class DioInitializer {
     required T Function(Map<String, dynamic>) parser,
     Object? data,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
   }) => _request(
     'PATCH',
     url,
     parser: parser,
     data: data,
     queryParameters: queryParameters,
+    headers: headers,
+    cancelToken: cancelToken,
   );
 
   Future<T> delete<T>({
@@ -78,12 +97,16 @@ class DioInitializer {
     required T Function(Map<String, dynamic>) parser,
     Object? data,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
   }) => _request(
     'DELETE',
     url,
     parser: parser,
     data: data,
     queryParameters: queryParameters,
+    headers: headers,
+    cancelToken: cancelToken,
   );
 
   Future<T> _request<T>(
@@ -92,12 +115,16 @@ class DioInitializer {
     required T Function(Map<String, dynamic>) parser,
     Object? data,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
   }) async {
+    final options = await DioOptionsBuilder.build(headers: headers);
     final response = await dio.request<Object?>(
       url,
       data: data,
       queryParameters: queryParameters,
-      options: Options(method: method),
+      options: options.copyWith(method: method),
+      cancelToken: cancelToken,
     );
     final responseData = response.data;
     if (responseData is Map<String, dynamic>) return parser(responseData);
