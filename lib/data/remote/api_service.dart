@@ -14,15 +14,14 @@ class ApiService {
     required String email,
     required String password,
     CancelToken? cancelToken,
-  }) {
-    return _dio.post(
-      url: '/login.php',
-      data: {'email': email, 'password': password},
-      cancelToken: cancelToken,
-      parser: (json) => ApiResponse<LoginResponse>.fromJson(
-        json,
-        fromJsonT: LoginResponse.fromJson,
-      ),
-    );
-  }
+  }) => _dio.post(
+    url: '/login.php',
+    data: {'email': email, 'password': password},
+    cancelToken: cancelToken,
+    requiresAuth: false,
+    parser: (json) => ApiResponse<LoginResponse>.fromJson(
+      json,
+      fromJsonT: LoginResponse.fromJson,
+    ),
+  );
 }

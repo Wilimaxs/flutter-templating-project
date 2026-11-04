@@ -21,7 +21,11 @@ class LoginController extends BaseController {
 
     try {
       final response = await apiService
-          .login(email: email, password: password)
+          .login(
+            email: email,
+            password: password,
+            cancelToken: requestCancelToken,
+          )
           .validateResponse;
 
       setLoading(false);
@@ -38,7 +42,7 @@ class LoginController extends BaseController {
     } catch (e) {
       setLoading(false);
       debugPrint("Login Error: $e");
-      showError(ErrorHandler.toNetworkException(e).message);
+      handleNetworkError(ErrorHandler.toNetworkException(e));
     }
   }
 }

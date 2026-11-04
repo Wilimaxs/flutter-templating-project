@@ -1,13 +1,16 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:template_flutter/data/dialogMixin/dialog_mixin.dart';
 import 'package:template_flutter/data/local_storage/storage_manager.dart';
 import 'package:template_flutter/data/remote/api_service.dart';
+import 'package:template_flutter/data/remote/errorMapper/network_exception.dart';
 
 abstract class BaseController<T> extends GetxController with DialogMixin {
   final ApiService apiService = Get.find<ApiService>();
   final isLoading = false.obs;
   final isRefreshing = false.obs;
+  final CancelToken requestCancelToken = CancelToken();
 
   final data = Rxn<T>();
 
@@ -42,9 +45,15 @@ abstract class BaseController<T> extends GetxController with DialogMixin {
 
   @override
   void onClose() {
+    requestCancelToken.cancel('Controller closed');
     data.value = null;
     super.onClose();
   }
 
   void showError(String message) => showErrorSnackbar(message);
+
+  void handleNetworkError(NetworkException error) {
+    if (error is RequestCancelled) return;
+    showError(error.message);
+  }
 }

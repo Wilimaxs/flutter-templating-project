@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
+import 'package:template_flutter/feature/auth/authentication.dart';
 
 import 'environment.dart';
 import 'errorMapper/error_handler.dart';
@@ -32,6 +34,7 @@ class DioInitializer {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    bool requiresAuth = true,
   }) => _request(
     'GET',
     url,
@@ -39,6 +42,7 @@ class DioInitializer {
     queryParameters: queryParameters,
     headers: headers,
     cancelToken: cancelToken,
+    requiresAuth: requiresAuth,
   );
 
   Future<T> post<T>({
@@ -48,6 +52,7 @@ class DioInitializer {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    bool requiresAuth = true,
   }) => _request(
     'POST',
     url,
@@ -56,6 +61,7 @@ class DioInitializer {
     queryParameters: queryParameters,
     headers: headers,
     cancelToken: cancelToken,
+    requiresAuth: requiresAuth,
   );
 
   Future<T> put<T>({
@@ -65,6 +71,7 @@ class DioInitializer {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    bool requiresAuth = true,
   }) => _request(
     'PUT',
     url,
@@ -73,6 +80,7 @@ class DioInitializer {
     queryParameters: queryParameters,
     headers: headers,
     cancelToken: cancelToken,
+    requiresAuth: requiresAuth,
   );
 
   Future<T> patch<T>({
@@ -82,6 +90,7 @@ class DioInitializer {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    bool requiresAuth = true,
   }) => _request(
     'PATCH',
     url,
@@ -90,6 +99,7 @@ class DioInitializer {
     queryParameters: queryParameters,
     headers: headers,
     cancelToken: cancelToken,
+    requiresAuth: requiresAuth,
   );
 
   Future<T> delete<T>({
@@ -99,6 +109,7 @@ class DioInitializer {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    bool requiresAuth = true,
   }) => _request(
     'DELETE',
     url,
@@ -107,6 +118,7 @@ class DioInitializer {
     queryParameters: queryParameters,
     headers: headers,
     cancelToken: cancelToken,
+    requiresAuth: requiresAuth,
   );
 
   Future<T> _request<T>(
@@ -117,9 +129,13 @@ class DioInitializer {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    required bool requiresAuth,
   }) async {
     try {
-      final options = await DioOptionsBuilder.build(headers: headers);
+      final options = await DioOptionsBuilder.build(
+        requiresAuth: requiresAuth,
+        headers: headers,
+      );
       final response = await dio.request<Object?>(
         url,
         data: data,
@@ -131,6 +147,11 @@ class DioInitializer {
       if (responseData is Map<String, dynamic>) return parser(responseData);
       return parser(<String, dynamic>{});
     } catch (error) {
+      if (requiresAuth &&
+          error is DioException &&
+          error.response?.statusCode == 401) {
+        await Get.find<AuthenticationService>().logout();
+      }
       throw ErrorHandler.toNetworkException(error);
     }
   }
