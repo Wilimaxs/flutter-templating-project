@@ -1,46 +1,87 @@
-import 'base_response.dart';
-
-// Response API for single object
-class ApiResponse<T> extends BaseResponse {
+/// Common fields returned by the API response envelope.
+class BaseResponse<T> {
+  final bool status;
+  final String message;
   final T? data;
 
-  ApiResponse({required super.status, required super.message, this.data});
+  const BaseResponse({
+    required this.status,
+    required this.message,
+    this.data,
+  });
+}
+
+/// Parses an API response whose `data` field is a JSON object.
+class ApiResponse<T> extends BaseResponse<T> {
+  const ApiResponse({
+    required super.status,
+    required super.message,
+    super.data,
+  });
 
   factory ApiResponse.fromJson(
-    Map<String, dynamic> json,
-    T Function(Map<String, dynamic>)? fromJsonT,
-  ) {
-    final resultData = json['data'];
-    return ApiResponse(
-      status: json['status'],
+    Map<String, dynamic> json, {
+    required T Function(Map<String, dynamic> json) fromJsonT,
+  }) {
+    final rawStatus = json['status'];
+    if (rawStatus is! bool) {
+      throw const FormatException('API response field "status" must be bool.');
+    }
+
+    final rawData = json['data'];
+    final parsedData = rawData == null
+        ? null
+        : rawData is Map<String, dynamic>
+        ? fromJsonT(rawData)
+        : throw const FormatException(
+            'API response field "data" must be a JSON object.',
+          );
+
+    return ApiResponse<T>(
+      status: rawStatus,
       message: json['message']?.toString() ?? '',
-      data: (resultData is Map<String, dynamic> && fromJsonT != null)
-          ? fromJsonT(resultData)
-          : null,
+      data: parsedData,
     );
   }
 }
 
-// Response API for list of objects
-class ApiResponseList<T> extends BaseResponse {
-  final List<T>? data;
-
-  ApiResponseList({required super.status, required super.message, this.data});
+/// Parses an API response whose `data` field is a JSON array.
+class ApiResponseList<T> extends BaseResponse<List<T>> {
+  const ApiResponseList({
+    required super.status,
+    required super.message,
+    super.data,
+  });
 
   factory ApiResponseList.fromJson(
-    Map<String, dynamic> json,
-    T Function(Map<String, dynamic>)? fromJsonT,
-  ) {
-    final resultData = json['data'];
-    return ApiResponseList(
-      status: json['status'],
+    Map<String, dynamic> json, {
+    required T Function(Map<String, dynamic> json) fromJsonT,
+  }) {
+    final rawStatus = json['status'];
+    if (rawStatus is! bool) {
+      throw const FormatException('API response field "status" must be bool.');
+    }
+
+    final rawData = json['data'];
+    final parsedData = rawData == null
+        ? null
+        : rawData is List
+        ? rawData.map((item) {
+            if (item is! Map<String, dynamic>) {
+              throw const FormatException(
+                'Every item in API response field "data" must be a JSON object.',
+              );
+            }
+            return fromJsonT(item);
+          }).toList()
+        : throw const FormatException(
+            'API response field "data" must be a JSON array.',
+          );
+
+    return ApiResponseList<T>(
+      status: rawStatus,
       message: json['message']?.toString() ?? '',
-      data: (resultData is List && fromJsonT != null)
-          ? resultData
-                .whereType<Map<String, dynamic>>()
-                .map((item) => fromJsonT(item))
-                .toList()
-          : null,
+      data: parsedData,
     );
   }
 }

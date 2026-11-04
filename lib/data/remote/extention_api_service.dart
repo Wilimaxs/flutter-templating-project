@@ -4,7 +4,11 @@ extension ApiResponseExtension<T> on Future<ApiResponse<T>> {
   Future<T> get validateResponse async {
     final response = await this;
     if (response.status == true) {
-      return response.data as T;
+      final data = response.data;
+      if (data == null) {
+        throw StateError('Successful API response did not include data.');
+      }
+      return data;
     } else {
       throw response.message;
     }
@@ -14,10 +18,9 @@ extension ApiResponseExtension<T> on Future<ApiResponse<T>> {
 extension ApiResponseListExtension<T> on Future<ApiResponseList<T>> {
   Future<List<T>> get validateResponse async {
     final response = await this;
-    if (response.status == true) {
-      return response.data ?? [];
-    } else {
-      throw response.message;
+    if (response.status) {
+      return response.data ?? <T>[];
     }
+    throw response.message;
   }
 }
