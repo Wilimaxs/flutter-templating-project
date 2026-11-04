@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:template_flutter/data/base/base_controller.dart';
 import 'package:template_flutter/data/remote/extention_api_service.dart';
+import 'package:template_flutter/data/remote/errorMapper/error_handler.dart';
 import 'package:template_flutter/feature/auth/authentication.dart';
 
 class LoginController extends BaseController {
@@ -37,7 +38,7 @@ class LoginController extends BaseController {
     } catch (e) {
       setLoading(false);
       debugPrint("Login Error: $e");
-      showError(e);
+      showError(ErrorHandler.toNetworkException(e).message);
     }
   }
 }

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 import 'environment.dart';
+import 'errorMapper/error_handler.dart';
 import 'interceptors/dio_interceptors.dart';
 import 'interceptors/dio_options_builder.dart';
 
@@ -22,7 +23,6 @@ class DioInitializer {
     );
 
     if (kDebugMode) client.interceptors.add(DioInterceptors.logging);
-    client.interceptors.add(DioInterceptors.errorHandler);
     return client;
   }
 
@@ -118,16 +118,20 @@ class DioInitializer {
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
   }) async {
-    final options = await DioOptionsBuilder.build(headers: headers);
-    final response = await dio.request<Object?>(
-      url,
-      data: data,
-      queryParameters: queryParameters,
-      options: options.copyWith(method: method),
-      cancelToken: cancelToken,
-    );
-    final responseData = response.data;
-    if (responseData is Map<String, dynamic>) return parser(responseData);
-    return parser(<String, dynamic>{});
+    try {
+      final options = await DioOptionsBuilder.build(headers: headers);
+      final response = await dio.request<Object?>(
+        url,
+        data: data,
+        queryParameters: queryParameters,
+        options: options.copyWith(method: method),
+        cancelToken: cancelToken,
+      );
+      final responseData = response.data;
+      if (responseData is Map<String, dynamic>) return parser(responseData);
+      return parser(<String, dynamic>{});
+    } catch (error) {
+      throw ErrorHandler.toNetworkException(error);
+    }
   }
 }

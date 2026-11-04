@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import '../error/error_handler.dart';
 
 class DioInterceptors {
   static InterceptorsWrapper get logging => InterceptorsWrapper(
@@ -49,18 +48,6 @@ class DioInterceptors {
         debugPrint('Response Body: $data');
       }
       debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-      return handler.next(error);
-    },
-  );
-
-  // Handle errors and perform actions based on status codes
-  static InterceptorsWrapper get errorHandler => InterceptorsWrapper(
-    onError: (error, handler) {
-      final statusCode = error.response?.statusCode;
-
-      // Actions based on status code
-      ErrorHandler.handleAction(statusCode);
-
       return handler.next(error);
     },
   );
