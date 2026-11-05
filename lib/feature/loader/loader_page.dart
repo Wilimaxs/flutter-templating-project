@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:template_flutter/utils/theme/app_color.dart';
 
 class LoaderPage extends StatelessWidget {
   const LoaderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       body: Center(
         child: Container(
           decoration: BoxDecoration(
-            color: AppColors.primaryContainerLight,
+            color: colorScheme.primaryContainer,
             borderRadius: BorderRadius.circular(10.0),
           ),
           padding: const EdgeInsets.all(24.0),

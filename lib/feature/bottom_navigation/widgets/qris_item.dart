@@ -8,6 +8,8 @@ class QrisItem extends GetView<BottomNavigationController> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Obx(() {
       final isActive = controller.currentIndex.value == 2;
 
@@ -22,15 +24,15 @@ class QrisItem extends GetView<BottomNavigationController> {
           child: Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.primaryLight,
+              color: colorScheme.primary,
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.white.withValues(alpha: 0.2),
+                color: colorScheme.onPrimary.withValues(alpha: 0.2),
                 width: 2,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primaryLight.withValues(
+                  color: colorScheme.primary.withValues(
                     alpha: isActive ? 0.2 : 0.4,
                   ),
                   blurRadius: isActive ? 4 : 10,
@@ -42,8 +44,8 @@ class QrisItem extends GetView<BottomNavigationController> {
             child: Icon(
               Icons.qr_code_scanner,
               color: isActive
-                  ? Colors.white.withValues(alpha: 0.8)
-                  : Colors.white,
+                  ? colorScheme.onPrimary.withValues(alpha: 0.8)
+                  : colorScheme.onPrimary,
               size: 28,
             ),
           ),

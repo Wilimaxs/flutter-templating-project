@@ -30,17 +30,19 @@ class StateHandle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     if (loadingWidget != null && isLoading) {
       return loadingWidget!;
     }
 
     return Stack(
       children: [
-        _buildMainContent(),
+        _buildMainContent(colorScheme),
         if (isLoading && loadingWidget == null) ...[
           const ModalBarrier(dismissible: false, color: Colors.transparent),
           Container(
-            color: Colors.black.withAlpha(25),
+            color: colorScheme.scrim.withValues(alpha: 0.1),
             child: const Center(child: CircularProgressIndicator()),
           ),
         ],
@@ -48,22 +50,32 @@ class StateHandle extends StatelessWidget {
     );
   }
 
-  Widget _buildMainContent() {
+  Widget _buildMainContent(ColorScheme colorScheme) {
     Widget content;
 
     if (isError) {
       content = _buildStateInfo(
         icon:
             errorIcon ??
-            const Icon(Icons.error_outline, size: 48, color: Colors.red),
+            Icon(
+              Icons.error_outline,
+              size: 48,
+              color: colorScheme.error,
+            ),
         message: errorText ?? "Terjadi kesalahan sistem",
+        color: colorScheme.onSurfaceVariant,
       );
     } else if (isEmpty) {
       content = _buildStateInfo(
         icon:
             emptyIcon ??
-            const Icon(Icons.inbox_outlined, size: 48, color: Colors.grey),
+            Icon(
+              Icons.inbox_outlined,
+              size: 48,
+              color: colorScheme.onSurfaceVariant,
+            ),
         message: emptyText ?? "Data tidak ditemukan",
+        color: colorScheme.onSurfaceVariant,
       );
     } else {
       content = child;
@@ -80,7 +92,11 @@ class StateHandle extends StatelessWidget {
     );
   }
 
-  Widget _buildStateInfo({required Widget icon, required String message}) {
+  Widget _buildStateInfo({
+    required Widget icon,
+    required String message,
+    required Color color,
+  }) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -92,9 +108,9 @@ class StateHandle extends StatelessWidget {
             Text(
               message,
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey,
+                color: color,
                 decoration: TextDecoration.none,
               ),
             ),

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:template_flutter/utils/theme/app_color.dart';
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
   final PreferredSizeWidget? bottom;
-  final Color titleColor;
-  final Color iconColor;
+  final Color? titleColor;
+  final Color? iconColor;
   final double elevation;
   final bool centerTitle;
   final bool showBackButton;
@@ -18,8 +17,8 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.actions,
     this.bottom,
-    this.titleColor = AppColors.text10,
-    this.iconColor = AppColors.primaryLight,
+    this.titleColor,
+    this.iconColor,
     this.elevation = 1,
     this.centerTitle = true,
     this.showBackButton = false,
@@ -28,26 +27,35 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return AppBar(
       title: Text(
         title,
         style: Theme.of(
           context,
-        ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
+        ).textTheme.bodyLarge?.copyWith(
+          color: titleColor ?? colorScheme.onSurface,
+          fontWeight: FontWeight.w600,
+        ),
       ),
       actions: actions,
       leading: showBackButton
           ? IconButton(
-              icon: Icon(Icons.arrow_back_ios_new, size: 20, color: iconColor),
+              icon: Icon(
+                Icons.arrow_back_ios_new,
+                size: 20,
+                color: iconColor ?? colorScheme.onSurface,
+              ),
               onPressed: onBackPressed ?? () => Get.back(),
             )
           : null,
       bottom: bottom,
-      backgroundColor: AppColors.white,
+      backgroundColor: colorScheme.surface,
       elevation: elevation,
-      shadowColor: AppColors.text20,
+      shadowColor: colorScheme.shadow.withValues(alpha: 0.08),
       centerTitle: centerTitle,
-      iconTheme: IconThemeData(color: iconColor),
+      iconTheme: IconThemeData(color: iconColor ?? colorScheme.onSurface),
       automaticallyImplyLeading: false,
     );
   }

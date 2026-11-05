@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:template_flutter/gen/assets.gen.dart';
-import 'package:template_flutter/utils/theme/app_color.dart';
 import 'package:template_flutter/utils/widgets/primary_button.dart';
 
 class AnotherLogin extends StatelessWidget {
@@ -9,12 +8,14 @@ class AnotherLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Column(
       children: [
         Row(
           children: [
-            const Expanded(
-              child: Divider(thickness: 1, color: AppColors.text60),
+            Expanded(
+              child: Divider(thickness: 1, color: colorScheme.outlineVariant),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -22,11 +23,13 @@ class AnotherLogin extends StatelessWidget {
                 'Or login with',
                 style: Theme.of(
                   context,
-                ).textTheme.bodyMedium?.copyWith(color: AppColors.text60),
+                ).textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
               ),
             ),
-            const Expanded(
-              child: Divider(thickness: 1, color: AppColors.text60),
+            Expanded(
+              child: Divider(thickness: 1, color: colorScheme.outlineVariant),
             ),
           ],
         ),

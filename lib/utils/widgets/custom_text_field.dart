@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:template_flutter/utils/theme/app_color.dart';
 
 class CustomTextField extends StatelessWidget {
   final String name;
@@ -40,6 +39,8 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -49,15 +50,14 @@ class CustomTextField extends StatelessWidget {
               text: label!,
               style: Theme.of(
                 context,
-              ).textTheme.titleMedium?.copyWith(color: AppColors.text80),
+              ).textTheme.titleMedium?.copyWith(color: colorScheme.onSurface),
               children: [
                 if (required)
-                  const TextSpan(
+                  TextSpan(
                     text: ' *',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: colorScheme.error),
                   ),
               ],
             ),
@@ -66,12 +66,14 @@ class CustomTextField extends StatelessWidget {
         ],
         Container(
           decoration: BoxDecoration(
-            color: enabled ? AppColors.white : AppColors.text20,
+            color: enabled
+                ? colorScheme.surface
+                : colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(12),
             boxShadow: enabled
                 ? [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.04),
+                      color: colorScheme.shadow.withValues(alpha: 0.04),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -86,36 +88,36 @@ class CustomTextField extends StatelessWidget {
               floatingLabelBehavior: FloatingLabelBehavior.never,
               prefixIcon: prefixIcon,
               suffixIcon: suffixIcon,
-              hintStyle: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(color: AppColors.text50),
+              hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
               contentPadding:
                   contentPadding ??
                   const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               fillColor: Colors.transparent,
               filled: true,
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.outlineLight),
+                borderSide: BorderSide(color: colorScheme.outline),
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: AppColors.primaryLight,
+                borderSide: BorderSide(
+                  color: colorScheme.primary,
                   width: 1.5,
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
               disabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.outlineLight),
+                borderSide: BorderSide(color: colorScheme.outline),
                 borderRadius: BorderRadius.circular(12),
               ),
               errorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.error),
+                borderSide: BorderSide(color: colorScheme.error),
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: AppColors.error,
+                borderSide: BorderSide(
+                  color: colorScheme.error,
                   width: 1.5,
                 ),
                 borderRadius: BorderRadius.circular(12),

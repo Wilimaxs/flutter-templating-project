@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:template_flutter/feature/login/widgets/another_login.dart';
 import 'package:template_flutter/feature/login/widgets/form_login.dart';
 import 'package:template_flutter/feature/login/widgets/signup_from_login.dart';
-import 'package:template_flutter/utils/theme/app_color.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SafeArea(
@@ -52,7 +53,7 @@ class LoginPage extends StatelessWidget {
                       Text(
                         "Jl. Anggrek Raya No. 17 RT 02/RW 05, Kel. Cipadung, Kec. Ujungberung, Kota Bandung, Prov. Jawa Barat",
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.text70,
+                          color: colorScheme.onSurfaceVariant,
                         ),
                         softWrap: true,
                         textAlign: TextAlign.center,

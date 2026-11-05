@@ -19,9 +19,13 @@ class NavItem extends GetView<BottomNavigationController> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Obx(() {
       final isActive = controller.currentIndex.value == index;
-      final color = isActive ? AppColors.primaryLight : AppColors.text50;
+      final color = isActive
+          ? colorScheme.primary
+          : colorScheme.onSurfaceVariant;
 
       return InkResponse(
         onTap: () => controller.changePage(index),

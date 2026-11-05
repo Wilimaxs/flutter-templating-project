@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:template_flutter/feature/bottom_navigation/widgets/nav_item.dart';
 import 'package:template_flutter/feature/bottom_navigation/widgets/qris_item.dart';
 import 'package:template_flutter/feature/home/home_page.dart';
-import 'package:template_flutter/utils/theme/app_color.dart';
 
 import 'bottom_navigation_controller.dart';
 
@@ -12,6 +11,8 @@ class BottomNavigationPage extends GetView<BottomNavigationController> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       body: SafeArea(
         child: Obx(
@@ -27,10 +28,11 @@ class BottomNavigationPage extends GetView<BottomNavigationController> {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         elevation: 10,
-        surfaceTintColor: AppColors.transparent,
-        shadowColor: AppColors.text50,
+        color: colorScheme.surface,
+        surfaceTintColor: Colors.transparent,
+        shadowColor: colorScheme.shadow,
         clipBehavior: Clip.antiAlias,
         child: SizedBox(
           height: 60,
