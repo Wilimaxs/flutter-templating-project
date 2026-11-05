@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// Secure storage for sensitive data like tokens
@@ -30,7 +30,8 @@ class SecureStorage {
       };
       await _instance.write(key: key, value: jsonEncode(data));
     } catch (e) {
-      debugPrint('SecureStorage Save Error: $e');
+      if (kDebugMode) debugPrint('SecureStorage save failed: $e');
+      rethrow;
     }
   }
 

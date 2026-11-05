@@ -40,7 +40,9 @@ class StorageManager {
 
   // Delete all data from both storages
   static Future<void> deleteAll() async {
-    await Storage.deleteAll();
-    await SecureStorage.deleteAll();
+    await Future.wait<void>([
+      Storage.deleteAll().then<void>((_) {}),
+      SecureStorage.deleteAll(),
+    ]);
   }
 }

@@ -61,7 +61,7 @@ class AuthenticationService extends GetxService {
 
   Future<void> saveAuthData({required String token, required User user}) async {
     await StorageManager.save('token', token, isSecure: true);
-    await StorageManager.save('user', user, isSecure: false);
+    await StorageManager.save('user', user.toJson(), isSecure: false);
     // await StorageManager.save('isFirstTime', false);
     setAuthenticated();
   }
