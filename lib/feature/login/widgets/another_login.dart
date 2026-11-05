@@ -9,42 +9,61 @@ class AnotherLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           children: [
-            Expanded(
-              child: Divider(thickness: 1, color: colorScheme.outlineVariant),
-            ),
+            Expanded(child: Divider(color: colorScheme.outlineVariant)),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Text(
-                'Or login with',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(
+                'METODE AKSES CEPAT',
+                style: textTheme.labelSmall?.copyWith(
                   color: colorScheme.onSurfaceVariant,
+                  fontSize: 10,
+                  letterSpacing: 0.3,
                 ),
               ),
             ),
-            Expanded(
-              child: Divider(thickness: 1, color: colorScheme.outlineVariant),
-            ),
+            Expanded(child: Divider(color: colorScheme.outlineVariant)),
           ],
         ),
-        const SizedBox(height: 24.0),
-        PrimaryButton(
-          text: 'Continue with Google',
-          reverse: true,
-          radius: 20,
-          height: 48,
-          onPressed: () {},
-          icon: SvgPicture.asset(
-            Assets.icons.icGoogleLogin.path,
-            width: 24,
-            height: 24,
-          ),
+        const SizedBox(height: 14),
+        Row(
+          children: [
+            Expanded(
+              child: PrimaryButton(
+                text: 'Biometrik',
+                onPressed: () {},
+                reverse: true,
+                height: 44,
+                radius: 12,
+                icon: Icon(
+                  Icons.fingerprint,
+                  color: colorScheme.primary,
+                  size: 18,
+                ),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: PrimaryButton(
+                text: 'Google',
+                onPressed: () {},
+                reverse: true,
+                height: 44,
+                radius: 12,
+                icon: SvgPicture.asset(
+                  Assets.icons.icGoogleLogin.path,
+                  width: 16,
+                  height: 16,
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );

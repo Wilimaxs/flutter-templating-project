@@ -39,7 +39,9 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: (enabled && !isLoading) ? onPressed : null,
         style: ElevatedButton.styleFrom(
-          backgroundColor: reverse ? colorScheme.surface : colorScheme.primary,
+          backgroundColor: reverse
+              ? colorScheme.surfaceContainerLow
+              : colorScheme.primary,
           foregroundColor: foregroundColor,
           disabledBackgroundColor: colorScheme.onSurface.withValues(
             alpha: 0.12,
@@ -51,8 +53,10 @@ class PrimaryButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(radius ?? 8.0),
           ),
           side: BorderSide(
-            color: reverse ? colorScheme.outline : colorScheme.primary,
-            width: 1.5,
+            color: reverse
+                ? colorScheme.outlineVariant.withValues(alpha: 0.45)
+                : colorScheme.primary,
+            width: reverse ? 1 : 1.5,
           ),
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 16),
