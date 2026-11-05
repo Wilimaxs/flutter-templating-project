@@ -48,7 +48,7 @@ class FormLogin extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
                 prefixIcon: Icon(Icons.mail_outline, size: 18),
-                contentPadding: const EdgeInsets.symmetric(
+                contentPadding: EdgeInsets.symmetric(
                   horizontal: AppSpacing.medium,
                   vertical: AppSpacing.small,
                 ),

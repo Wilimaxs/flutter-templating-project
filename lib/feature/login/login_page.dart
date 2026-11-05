@@ -36,7 +36,7 @@ class LoginPage extends GetView<LoginController> {
                       ),
                     ),
                     const SizedBox(height: AppSpacing.extraLarge),
-                    const AnotherLogin(),
+                    AnotherLogin(onBypass: controller.bypassLogin),
                   ],
                 ),
               ),

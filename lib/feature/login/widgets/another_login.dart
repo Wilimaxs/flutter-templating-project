@@ -3,7 +3,9 @@ import 'package:template_flutter/utils/theme/app_spacing.dart';
 import 'package:template_flutter/utils/widgets/primary_button.dart';
 
 class AnotherLogin extends StatelessWidget {
-  const AnotherLogin({super.key});
+  const AnotherLogin({super.key, required this.onBypass});
+
+  final VoidCallback onBypass;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,7 @@ class AnotherLogin extends StatelessWidget {
             Expanded(
               child: PrimaryButton(
                 text: 'Bypass',
-                onPressed: () {},
+                onPressed: onBypass,
                 reverse: true,
                 height: 44,
                 radius: 12,
