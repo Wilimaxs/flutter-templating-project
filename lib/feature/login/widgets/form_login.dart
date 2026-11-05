@@ -9,14 +9,12 @@ class FormLogin extends StatelessWidget {
   const FormLogin({
     super.key,
     required this.formKey,
-    required this.isLoading,
     required this.obscurePassword,
     required this.onTogglePassword,
     required this.onSubmit,
   });
 
   final GlobalKey<FormBuilderState> formKey;
-  final bool isLoading;
   final bool obscurePassword;
   final VoidCallback onTogglePassword;
   final VoidCallback onSubmit;
@@ -99,7 +97,6 @@ class FormLogin extends StatelessWidget {
               PrimaryButton(
                 text: 'MASUK',
                 onPressed: onSubmit,
-                isLoading: isLoading,
                 height: 44,
               ),
             ],
