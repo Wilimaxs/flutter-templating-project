@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:template_flutter/utils/theme/app_spacing.dart';
+import 'package:template_flutter/utils/widgets/app_badge.dart';
 
 class LoginHeader extends StatelessWidget {
   const LoginHeader({super.key});
@@ -45,34 +46,28 @@ class LoginHeader extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: AppSpacing.extraSmall),
-                Container(
-                  padding: const EdgeInsets.symmetric(
+                AppBadge(
+                  text: 'Arsip Terbuka',
+                  textStyle: textTheme.labelSmall?.copyWith(
+                    color: colorScheme.onSurface,
+                  ),
+                  icon: Container(
+                    width: 6,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      color: colorScheme.primary,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  iconSpacing: AppSpacing.extraSmall,
+                  containerColor: colorScheme.surfaceContainerHigh,
+                  containerBorderColor: colorScheme.surfaceContainerHigh,
+                  containerBorderSize: 0,
+                  borderRadius: BorderRadius.circular(100),
+                  contentDescription: 'Status arsip terbuka',
+                  contentPadding: const EdgeInsets.symmetric(
                     horizontal: AppSpacing.small,
                     vertical: AppSpacing.extraSmall,
-                  ),
-                  decoration: BoxDecoration(
-                    color: colorScheme.surfaceContainerLow,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: 6,
-                        height: 6,
-                        decoration: BoxDecoration(
-                          color: colorScheme.primary,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      const SizedBox(width: AppSpacing.extraSmall),
-                      Text(
-                        'Arsip Terbuka',
-                        style: textTheme.labelSmall?.copyWith(
-                          color: colorScheme.onSurface,
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ],
