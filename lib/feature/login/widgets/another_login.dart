@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:template_flutter/gen/assets.gen.dart';
 import 'package:template_flutter/utils/theme/app_spacing.dart';
 import 'package:template_flutter/utils/widgets/primary_button.dart';
 
@@ -54,15 +52,15 @@ class AnotherLogin extends StatelessWidget {
             const SizedBox(width: AppSpacing.small),
             Expanded(
               child: PrimaryButton(
-                text: 'Google',
+                text: 'Bypass',
                 onPressed: () {},
                 reverse: true,
                 height: 44,
                 radius: 12,
-                icon: SvgPicture.asset(
-                  Assets.icons.icGoogleLogin.path,
-                  width: 16,
-                  height: 16,
+                icon: Icon(
+                  Icons.lock_outline,
+                  color: colorScheme.primary,
+                  size: 18,
                 ),
               ),
             ),
