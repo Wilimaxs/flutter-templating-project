@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:template_flutter/gen/assets.gen.dart';
+import 'package:template_flutter/utils/theme/app_spacing.dart';
 import 'package:template_flutter/utils/widgets/primary_button.dart';
 
 class AnotherLogin extends StatelessWidget {
@@ -18,7 +19,9 @@ class AnotherLogin extends StatelessWidget {
           children: [
             Expanded(child: Divider(color: colorScheme.outlineVariant)),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.medium,
+              ),
               child: Text(
                 'METODE AKSES CEPAT',
                 style: textTheme.labelSmall?.copyWith(
@@ -31,7 +34,7 @@ class AnotherLogin extends StatelessWidget {
             Expanded(child: Divider(color: colorScheme.outlineVariant)),
           ],
         ),
-        const SizedBox(height: 14),
+        const SizedBox(height: AppSpacing.medium),
         Row(
           children: [
             Expanded(
@@ -48,7 +51,7 @@ class AnotherLogin extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: AppSpacing.small),
             Expanded(
               child: PrimaryButton(
                 text: 'Google',

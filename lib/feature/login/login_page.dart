@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:template_flutter/feature/login/login_controller.dart';
 import 'package:template_flutter/feature/login/widgets/another_login.dart';
 import 'package:template_flutter/feature/login/widgets/form_login.dart';
+import 'package:template_flutter/utils/theme/app_spacing.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
@@ -13,7 +14,7 @@ class LoginPage extends GetView<LoginController> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.large),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -26,7 +27,7 @@ class LoginPage extends GetView<LoginController> {
                     onSubmit: controller.login,
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: AppSpacing.extraLarge),
                 const AnotherLogin(),
               ],
             ),

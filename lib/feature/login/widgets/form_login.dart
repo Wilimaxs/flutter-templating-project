@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:template_flutter/utils/theme/app_spacing.dart';
 import 'package:template_flutter/utils/validation/login_validators.dart';
 import 'package:template_flutter/utils/widgets/custom_text_field.dart';
 import 'package:template_flutter/utils/widgets/primary_button.dart';
@@ -35,7 +36,7 @@ class FormLogin extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(AppSpacing.extraLarge),
         child: FormBuilder(
           key: formKey,
           child: Column(
@@ -51,7 +52,7 @@ class FormLogin extends StatelessWidget {
                 prefixIcon: Icon(Icons.mail_outline),
                 validator: FormValidators.email,
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: AppSpacing.medium),
               CustomTextField(
                 name: 'Password',
                 label: 'Kunci Sandi Enkripsi',
@@ -73,7 +74,7 @@ class FormLogin extends StatelessWidget {
                 ),
                 validator: FormValidators.password,
               ),
-              const SizedBox(height: 18),
+              const SizedBox(height: AppSpacing.large),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -82,7 +83,7 @@ class FormLogin extends StatelessWidget {
                     color: colorScheme.primary,
                     size: 14,
                   ),
-                  const SizedBox(width: 8),
+                  const SizedBox(width: AppSpacing.small),
                   Expanded(
                     child: Text(
                       'Koneksi aman ke repositori transkripsi folklor nasional.',
@@ -94,7 +95,7 @@ class FormLogin extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.large),
               PrimaryButton(
                 text: 'MASUK',
                 onPressed: onSubmit,
