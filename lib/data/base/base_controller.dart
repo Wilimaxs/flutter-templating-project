@@ -25,8 +25,11 @@ abstract class BaseController<T> extends GetxController with DialogMixin {
 
   Future<void> onRefresh() async {
     isRefreshing.value = true;
-    await fetchData();
-    isRefreshing.value = false;
+    try {
+      await fetchData();
+    } finally {
+      isRefreshing.value = false;
+    }
   }
 
   Future<void> fetchData() async {}
