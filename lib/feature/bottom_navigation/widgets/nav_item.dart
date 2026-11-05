@@ -1,62 +1,67 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:template_flutter/feature/bottom_navigation/bottom_navigation_controller.dart';
-import 'package:template_flutter/utils/theme/app_color.dart';
+import 'package:template_flutter/utils/theme/app_spacing.dart';
 
-class NavItem extends GetView<BottomNavigationController> {
+class NavItem extends StatelessWidget {
   const NavItem({
     super.key,
-    required this.inActiveIcon,
     required this.activeIcon,
+    required this.inactiveIcon,
     required this.label,
-    required this.index,
+    required this.isActive,
+    required this.onTap,
   });
 
-  final IconData inActiveIcon;
   final IconData activeIcon;
+  final IconData inactiveIcon;
   final String label;
-  final int index;
+  final bool isActive;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+    final itemColor = isActive
+        ? colorScheme.primary
+        : colorScheme.onSurfaceVariant;
 
-    return Obx(() {
-      final isActive = controller.currentIndex.value == index;
-      final color = isActive
-          ? colorScheme.primary
-          : colorScheme.onSurfaceVariant;
-
-      return InkResponse(
-        onTap: () => controller.changePage(index),
-        splashColor: AppColors.transparent,
-        highlightColor: AppColors.transparent,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          transform: isActive
-              ? Matrix4.translationValues(0, -2, 0)
-              : Matrix4.identity(),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                isActive ? activeIcon : inActiveIcon,
-                color: color,
-                size: isActive ? 26 : 24,
-              ),
-              Text(
-                label,
-                style: TextStyle(
-                  color: color,
-                  fontSize: 12,
-                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+    return Semantics(
+      button: true,
+      selected: isActive,
+      label: label,
+      child: SizedBox(
+        height: 48,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(100),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: AppSpacing.extraSmall),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  isActive ? activeIcon : inactiveIcon,
+                  color: itemColor,
+                  size: 22,
                 ),
-              ),
-            ],
+                const SizedBox(height: AppSpacing.extraSmall),
+                Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: textTheme.labelSmall?.copyWith(
+                    color: itemColor,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.2,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      );
-    });
+      ),
+    );
   }
 }
