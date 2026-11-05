@@ -1,87 +1,49 @@
 /// Common fields returned by the API response envelope.
-class BaseResponse<T> {
+class BaseResponse {
   final bool status;
   final String message;
-  final T? data;
 
-  const BaseResponse({
-    required this.status,
-    required this.message,
-    this.data,
-  });
+  const BaseResponse({required this.status, required this.message});
 }
 
 /// Parses an API response whose `data` field is a JSON object.
-class ApiResponse<T> extends BaseResponse<T> {
-  const ApiResponse({
-    required super.status,
-    required super.message,
-    super.data,
-  });
+class ApiResponse<T> extends BaseResponse {
+  final T? data;
+
+  const ApiResponse({required super.status, required super.message, this.data});
 
   factory ApiResponse.fromJson(
     Map<String, dynamic> json, {
     required T Function(Map<String, dynamic> json) fromJsonT,
   }) {
-    final rawStatus = json['status'];
-    if (rawStatus is! bool) {
-      throw const FormatException('API response field "status" must be bool.');
-    }
-
-    final rawData = json['data'];
-    final parsedData = rawData == null
-        ? null
-        : rawData is Map<String, dynamic>
-        ? fromJsonT(rawData)
-        : throw const FormatException(
-            'API response field "data" must be a JSON object.',
-          );
-
     return ApiResponse<T>(
-      status: rawStatus,
-      message: json['message']?.toString() ?? '',
-      data: parsedData,
+      status: json['status'],
+      message: json['message'],
+      data: json['data'] == null ? null : fromJsonT(json['data']),
     );
   }
 }
 
 /// Parses an API response whose `data` field is a JSON array.
-class ApiResponseList<T> extends BaseResponse<List<T>> {
+class ApiResponseList<T> extends BaseResponse {
+  final List<T>? data;
+
   const ApiResponseList({
     required super.status,
     required super.message,
-    super.data,
+    this.data,
   });
 
   factory ApiResponseList.fromJson(
     Map<String, dynamic> json, {
     required T Function(Map<String, dynamic> json) fromJsonT,
   }) {
-    final rawStatus = json['status'];
-    if (rawStatus is! bool) {
-      throw const FormatException('API response field "status" must be bool.');
-    }
-
-    final rawData = json['data'];
-    final parsedData = rawData == null
-        ? null
-        : rawData is List
-        ? rawData.map((item) {
-            if (item is! Map<String, dynamic>) {
-              throw const FormatException(
-                'Every item in API response field "data" must be a JSON object.',
-              );
-            }
-            return fromJsonT(item);
-          }).toList()
-        : throw const FormatException(
-            'API response field "data" must be a JSON array.',
-          );
-
     return ApiResponseList<T>(
-      status: rawStatus,
-      message: json['message']?.toString() ?? '',
-      data: parsedData,
+      status: json['status'],
+      message: json['message'],
+      data: json['data'] == null
+          ? null
+          : List<T>.from(json['data'].map((e) => fromJsonT(e))),
     );
   }
 }
