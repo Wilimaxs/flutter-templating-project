@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:template_flutter/gen/assets.gen.dart';
 import 'package:template_flutter/utils/theme/app_spacing.dart';
 import 'package:template_flutter/utils/validation/login_validators.dart';
 import 'package:template_flutter/utils/widgets/custom_text_field.dart';
@@ -40,15 +41,22 @@ class FormLogin extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const CustomTextField(
+              CustomTextField(
                 name: 'email',
                 label: 'Identitas Peneliti (Surel)',
                 hint: 'peneliti.sunda@mythos.id',
                 required: true,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
-                prefixIcon: Icon(Icons.mail_outline, size: 18),
-                contentPadding: EdgeInsets.symmetric(
+                prefixIcon: Assets.icons.icEmail.svg(
+                  width: 18,
+                  height: 18,
+                  colorFilter: ColorFilter.mode(
+                    colorScheme.onSurfaceVariant,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
                   horizontal: AppSpacing.medium,
                   vertical: AppSpacing.small,
                 ),
@@ -62,7 +70,14 @@ class FormLogin extends StatelessWidget {
                 required: true,
                 obscureText: obscurePassword,
                 textInputAction: TextInputAction.done,
-                prefixIcon: const Icon(Icons.key_outlined, size: 18),
+                prefixIcon: Assets.icons.icPassword.svg(
+                  width: 18,
+                  height: 18,
+                  colorFilter: ColorFilter.mode(
+                    colorScheme.onSurfaceVariant,
+                    BlendMode.srcIn,
+                  ),
+                ),
                 suffixIcon: IconButton(
                   tooltip: obscurePassword
                       ? 'Tampilkan kata sandi'

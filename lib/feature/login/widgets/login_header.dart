@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:template_flutter/gen/assets.gen.dart';
 import 'package:template_flutter/utils/theme/app_spacing.dart';
 import 'package:template_flutter/utils/widgets/app_badge.dart';
 
@@ -27,10 +28,13 @@ class LoginHeader extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.menu_book_rounded,
-                  color: colorScheme.primary,
-                  size: 28,
+                Assets.icons.icBook.svg(
+                  width: 28,
+                  height: 28,
+                  colorFilter: ColorFilter.mode(
+                    colorScheme.primary,
+                    BlendMode.srcIn,
+                  ),
                 ),
                 const SizedBox(width: AppSpacing.small),
                 Expanded(
