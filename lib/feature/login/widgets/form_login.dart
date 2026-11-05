@@ -34,7 +34,7 @@ class FormLogin extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.extraLarge),
+        padding: const EdgeInsets.all(AppSpacing.large),
         child: FormBuilder(
           key: formKey,
           child: Column(
@@ -47,7 +47,11 @@ class FormLogin extends StatelessWidget {
                 required: true,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
-                prefixIcon: Icon(Icons.mail_outline),
+                prefixIcon: Icon(Icons.mail_outline, size: 18),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.medium,
+                  vertical: AppSpacing.small,
+                ),
                 validator: FormValidators.email,
               ),
               const SizedBox(height: AppSpacing.medium),
@@ -58,7 +62,7 @@ class FormLogin extends StatelessWidget {
                 required: true,
                 obscureText: obscurePassword,
                 textInputAction: TextInputAction.done,
-                prefixIcon: const Icon(Icons.key_outlined),
+                prefixIcon: const Icon(Icons.key_outlined, size: 18),
                 suffixIcon: IconButton(
                   tooltip: obscurePassword
                       ? 'Tampilkan kata sandi'
@@ -68,7 +72,12 @@ class FormLogin extends StatelessWidget {
                     obscurePassword
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
+                    size: 18,
                   ),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.medium,
+                  vertical: AppSpacing.small,
                 ),
                 validator: FormValidators.password,
               ),
@@ -87,7 +96,7 @@ class FormLogin extends StatelessWidget {
                       'Koneksi aman ke repositori transkripsi folklor nasional.',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: colorScheme.onSurfaceVariant,
-                        fontSize: 10,
+                        fontSize: 11,
                       ),
                     ),
                   ),

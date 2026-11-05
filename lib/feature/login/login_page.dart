@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:template_flutter/feature/login/login_controller.dart';
 import 'package:template_flutter/feature/login/widgets/another_login.dart';
 import 'package:template_flutter/feature/login/widgets/form_login.dart';
+import 'package:template_flutter/feature/login/widgets/login_header.dart';
 import 'package:template_flutter/utils/theme/app_spacing.dart';
 import 'package:template_flutter/utils/widgets/state_handle.dart';
 
@@ -22,8 +23,10 @@ class LoginPage extends GetView<LoginController> {
                   horizontal: AppSpacing.large,
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    const LoginHeader(),
+                    const SizedBox(height: AppSpacing.extraLarge),
                     Obx(
                       () => FormLogin(
                         formKey: controller.loginFromKey,

@@ -40,6 +40,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,9 +49,10 @@ class CustomTextField extends StatelessWidget {
           RichText(
             text: TextSpan(
               text: label!,
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium?.copyWith(color: colorScheme.onSurface),
+              style: textTheme.labelMedium?.copyWith(
+                color: colorScheme.onSurface,
+                fontWeight: FontWeight.w600,
+              ),
               children: [
                 if (required)
                   TextSpan(
@@ -88,7 +90,7 @@ class CustomTextField extends StatelessWidget {
               floatingLabelBehavior: FloatingLabelBehavior.never,
               prefixIcon: prefixIcon,
               suffixIcon: suffixIcon,
-              hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              hintStyle: textTheme.bodySmall?.copyWith(
                 color: colorScheme.onSurfaceVariant,
               ),
               contentPadding:
