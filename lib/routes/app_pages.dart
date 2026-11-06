@@ -22,7 +22,7 @@ class PageRoutes {
       binding: BottomNavigationBinding(),
     ),
     GetPage(
-      name: Routes.home,
+      name: Routes.explore,
       page: () => const ExplorePage(),
       binding: BottomNavigationBinding(),
     ),
