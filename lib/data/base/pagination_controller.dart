@@ -27,8 +27,6 @@ abstract class PaginationController<T> extends BaseController<T> {
       }
 
       page.value = 1;
-      isLastPage.value = false;
-      listData.clear();
       await fetchData();
     } finally {
       isRefreshing.value = false;
