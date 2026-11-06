@@ -45,8 +45,8 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Assets.images.imgLogo.image(
-                  width: AppSpacing.huge,
-                  height: AppSpacing.huge,
+                  width: AppSpacing.extraExtraExtraLarge,
+                  height: AppSpacing.extraExtraExtraLarge,
                   fit: BoxFit.contain,
                   filterQuality: FilterQuality.high,
                   semanticLabel: 'Logo Mythos Nusantara',
