@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:template_flutter/feature/bottom_navigation/widgets/nav_item.dart';
-import 'package:template_flutter/feature/home/home_page.dart';
+import 'package:template_flutter/feature/explore/explore_page.dart';
 import 'package:template_flutter/utils/theme/app_spacing.dart';
 
 import 'bottom_navigation_controller.dart';
@@ -21,7 +21,7 @@ class BottomNavigationPage extends GetView<BottomNavigationController> {
           () => IndexedStack(
             index: controller.currentIndex.value,
             children: const [
-              HomePage(),
+              ExplorePage(),
               Center(child: Text('Map')),
               Center(child: Text('Saved')),
               Center(child: Text('Profile')),

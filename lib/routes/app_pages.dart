@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:template_flutter/feature/bottom_navigation/bottom_navigation_binding.dart';
 import 'package:template_flutter/feature/bottom_navigation/bottom_navigation_page.dart';
-import 'package:template_flutter/feature/home/home_page.dart';
+import 'package:template_flutter/feature/explore/explore_page.dart';
 import 'package:template_flutter/feature/loader/loader_page.dart';
 import 'package:template_flutter/feature/login/login_binding.dart';
 import 'package:template_flutter/feature/login/login_page.dart';
@@ -23,7 +23,7 @@ class PageRoutes {
     ),
     GetPage(
       name: Routes.home,
-      page: () => const HomePage(),
+      page: () => const ExplorePage(),
       binding: BottomNavigationBinding(),
     ),
   ];
